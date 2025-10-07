@@ -1,9 +1,9 @@
 import express from 'express';
-import loginUser from '../controllers/loginUser.js'; // конечный обработчик (бизнес-логика)
+import loginUser from '../controllers/loginUser.js'; // конечный обработчик с бизнес-логикой
 
 const router = express.Router();
 
-// Middleware уровня маршрутизации - авторизации пользователя:
-router.post('/login', loginUser);
+// Middleware уровня маршрутизации:
+router.post('/login', loginUser); // авторизации пользователя
 
 export default router;
