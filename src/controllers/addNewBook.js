@@ -7,14 +7,14 @@ const addNewBook = (req, res) => {
   const { title, description, authors, favorite, fileCover, fileName } =
     req.body;
 
-  const newBook = new Book(
+  const newBook = new Book({
     title,
     description,
     authors,
     favorite,
     fileCover,
     fileName,
-  );
+  });
 
   books.push(newBook);
   sendSuccess(res, 201, newBook); // 201 - Created
