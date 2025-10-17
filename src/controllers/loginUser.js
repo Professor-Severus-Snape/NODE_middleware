@@ -1,19 +1,23 @@
-import { sendError, sendSuccess } from '../utils/response.js';
+import { sendSuccess } from '../utils/response.js';
 import users from '../data/users.js';
 
 // бизнес-логика - авторизация пользователя:
-const loginUser = (req, res) => {
+const loginUser = (req, res, next) => {
   const { mail } = req.body;
 
   if (!mail) {
-    sendError(res, 400, 'Поле "mail" обязательно'); // 400 - Bad Request (некорректные данные)
+    const error = new Error('Поле "mail" обязательно');
+    error.status = 400; // 400 - Bad Request (некорректные данные)
+    next(error); // передаём ошибку в errorHandler
     return;
   }
 
   const user = users.find((user) => user.mail === mail);
 
   if (!user) {
-    sendError(res, 404, 'Пользователь с таким email не найден'); // 404 - Not Found
+    const error = new Error('Code: 404. Пользователь с таким email не найден');
+    error.status = 404; // 404 - Not Found
+    next(error); // передаём ошибку в errorHandler
     return;
   }
 

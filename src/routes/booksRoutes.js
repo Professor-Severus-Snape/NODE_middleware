@@ -4,14 +4,15 @@ import deleteBookById from '../controllers/deleteBookById.js'; // конечны
 import getAllBooks from '../controllers/getAllBooks.js'; // конечный обработчик
 import getBookById from '../controllers/getBookById.js'; // конечный обработчик
 import updateBookById from '../controllers/updateBookById.js'; // конечный обработчик
+import multerUploadBook from '../middleware/multerUploadBook.js'; // middleware (multer - загрузка)
 
 const router = express.Router();
 
 // Middlewares уровня маршрутизации:
 router.get('/', getAllBooks); // получение всего списка книг
 router.get('/:id', getBookById); // получение книги по её id
-router.post('/', addNewBook); // добавление новой книги в массив
-router.put('/:id', updateBookById); // изменение данных о книге по её id
+router.post('/', multerUploadBook.single('fileBook'), addNewBook); // создание новой книги
+router.put('/:id', multerUploadBook.single('fileBook'), updateBookById); // изменение данных книги
 router.delete('/:id', deleteBookById); // удаление книги по её id
 
 export default router;

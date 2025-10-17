@@ -8,6 +8,7 @@ export default class Book {
     favorite = 'нет данных',
     fileCover = 'нет данных',
     fileName = 'нет данных',
+    fileBook = 'нет данных', // имя! загруженного файла книги
   } = {}) {
     this.id = uuid();
     this.title = title;
@@ -16,5 +17,6 @@ export default class Book {
     this.favorite = favorite;
     this.fileCover = fileCover;
     this.fileName = fileName;
+    this.fileBook = fileBook;
   }
 }
